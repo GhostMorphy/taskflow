@@ -1,0 +1,25 @@
+{% extends "tasks/base.html" %}
+
+{% block content %}
+<ul>
+  {% for task in tasks %}
+    <li>
+      <span id="task-{{ task.id }}">
+        {{ task.title }}
+        {% if task.completed %}✅{% endif %}
+      </span>
+      <button onclick="toggleTask({{ task.id }})">Toggle</button>
+    </li>
+  {% endfor %}
+</ul>
+
+<script>
+function toggleTask(taskId) {
+  fetch(`/toggle/${taskId}/`)
+    .then(response => response.json())
+    .then(data => {
+      location.reload();
+    });
+}
+</script>
+{% endblock %}
