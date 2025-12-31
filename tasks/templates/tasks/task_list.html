@@ -4,11 +4,17 @@
 <ul>
   {% for task in tasks %}
     <li>
-      <span id="task-{{ task.id }}">
+      <span>
         {{ task.title }}
         {% if task.completed %}✅{% endif %}
       </span>
+
       <button onclick="toggleTask({{ task.id }})">Toggle</button>
+
+      <a href="{% url 'delete-task' task.id %}"
+         onclick="return confirm('Delete this task?');">
+         🗑️ Delete
+      </a>
     </li>
   {% endfor %}
 </ul>
@@ -17,9 +23,7 @@
 function toggleTask(taskId) {
   fetch(`/toggle/${taskId}/`)
     .then(response => response.json())
-    .then(data => {
-      location.reload();
-    });
+    .then(() => location.reload());
 }
 </script>
 {% endblock %}
