@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from .models import Task
 
@@ -11,3 +11,14 @@ def toggle_task(request, task_id):
     task.completed = not task.completed
     task.save()
     return JsonResponse({"completed": task.completed})
+
+# temp stash test
+
+# CHERRY PICK TEST
+
+
+def delete_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    task.delete()
+    return redirect("task-list")
+
