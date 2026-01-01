@@ -12,6 +12,9 @@ def toggle_task(request, task_id):
     task.save()
     return JsonResponse({"completed": task.completed})
 
+# temp stash test
+
+# CHERRY PICK TEST
 
 
 def delete_task(request, task_id):
